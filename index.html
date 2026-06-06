@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🧠 Binary Search Challenge</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root{
+    --primary:#6366f1;
+    --primary-hover:#4f46e5;
+    --success:#10b981;
+    --danger:#ef4444;
+    --warning:#f59e0b;
+    --secondary:#334155;
+
+    --text:#f8fafc;
+    --muted:#94a3b8;
+
+    --bg:
+    linear-gradient(
+        135deg,
+        #0f172a 0%,
+        #1e1b4b 100%
+    );
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Inter',sans-serif;
+}
+
+body{
+    min-height:100vh;
+    background:var(--bg);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+    color:var(--text);
+}
+
+.container{
+    width:100%;
+    max-width:900px;
+
+    padding:35px;
+
+    border-radius:28px;
+
+    background:
+    linear-gradient(
+        145deg,
+        rgba(255,255,255,.08),
+        rgba(255,255,255,.03)
+    );
+
+    backdrop-filter:blur(20px);
+
+    box-shadow:
+    0 20px 50px rgba(0,0,0,.45),
+    inset 0 1px 1px rgba(255,255,255,.1);
+}
+
+.hero{
+    text-align:center;
+}
+
+.hero-icon{
+    font-size:70px;
+    animation:float 3s ease-in-out infinite;
+}
+
+@keyframes float{
+    50%{
+        transform:translateY(-8px);
+    }
+}
+
+h1{
+    margin-top:10px;
+    font-size:38px;
+}
+
+.subtitle{
+    color:var(--muted);
+    margin-top:10px;
+    margin-bottom:30px;
+}
+
+.difficulty{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-bottom:25px;
+}
+
+.preset{
+    border:none;
+    cursor:pointer;
+    border-radius:12px;
+    padding:10px 18px;
+
+    background:rgba(255,255,255,.08);
+    color:white;
+
+    transition:.25s;
+}
+
+.preset:hover{
+    background:rgba(255,255,255,.15);
+}
+
+.range-box{
+    display:grid;
+    grid-template-columns:1fr 1fr auto;
+    gap:15px;
+    align-items:end;
+    margin-bottom:30px;
+}
+
+.group{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+}
+
+.group label{
+    font-size:13px;
+    color:var(--muted);
+}
+
+input{
+    width:100%;
+    padding:14px;
+
+    border:none;
+    border-radius:14px;
+
+    background:rgba(255,255,255,.08);
+    color:white;
+
+    font-size:16px;
+}
+
+input:focus{
+    outline:none;
+    box-shadow:0 0 0 3px rgba(99,102,241,.3);
+}
+
+button{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border:none;
+    cursor:pointer;
+
+    font-weight:600;
+
+    transition:.25s;
+}
+
+button:hover{
+    transform:translateY(-2px);
+}
+
+.start{
+    height:50px;
+    padding:0 24px;
+    border-radius:14px;
+
+    background:var(--primary);
+    color:white;
+}
+
+.start:hover{
+    background:var(--primary-hover);
+}
+
+#game{
+    display:none;
+}
+
+.card{
+    background:rgba(99,102,241,.08);
+
+    border:1px solid rgba(99,102,241,.15);
+
+    border-radius:24px;
+    padding:30px;
+    text-align:center;
+}
+
+.guess-label{
+    color:#a5b4fc;
+    text-transform:uppercase;
+    font-size:13px;
+    letter-spacing:1px;
+}
+
+#guess{
+    font-size:90px;
+    font-weight:800;
+    margin:15px 0;
+}
+
+.progress{
+    height:10px;
+    background:rgba(255,255,255,.08);
+    border-radius:30px;
+    overflow:hidden;
+    margin:20px 0;
+}
+
+.progress-fill{
+    width:0%;
+    height:100%;
+
+    background:
+    linear-gradient(
+        90deg,
+        #6366f1,
+        #8b5cf6
+    );
+
+    transition:width .4s ease;
+}
+
+.stats{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+.badge{
+    padding:10px 16px;
+    border-radius:999px;
+
+    background:rgba(255,255,255,.08);
+    color:var(--muted);
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+    margin-top:20px;
+}
+
+.action{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+    margin-top:15px;
+}
+
+.grid button,
+.action button{
+    height:58px;
+    border-radius:14px;
+    font-size:17px;
+}
+
+.higher{
+    background:var(--success);
+    color:white;
+}
+
+.lower{
+    background:var(--danger);
+    color:white;
+}
+
+.correct{
+    background:white;
+    color:black;
+}
+
+.undo{
+    background:var(--warning);
+    color:black;
+}
+
+.restart{
+    background:var(--secondary);
+    color:white;
+}
+
+.result{
+    margin-top:20px;
+    display:none;
+}
+
+.success{
+    display:block;
+}
+
+.error{
+    display:block;
+    background:rgba(239,68,68,.15);
+    color:#fca5a5;
+    padding:18px;
+    border-radius:16px;
+}
+
+.summary-card{
+    background:rgba(16,185,129,.12);
+    border:1px solid rgba(16,185,129,.2);
+
+    border-radius:20px;
+    padding:25px;
+    text-align:center;
+}
+
+.final-number{
+    font-size:72px;
+    font-weight:800;
+    margin:15px 0;
+}
+
+.summary-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+    margin-top:20px;
+}
+
+.summary-grid div{
+    padding:16px;
+    border-radius:14px;
+    background:rgba(255,255,255,.06);
+}
+
+.summary-grid span{
+    display:block;
+    font-size:13px;
+    color:var(--muted);
+    margin-bottom:8px;
+}
+
+.summary-grid h3{
+    font-size:28px;
+}
+
+@media(max-width:768px){
+
+    .range-box{
+        grid-template-columns:1fr;
+    }
+
+    .grid{
+        grid-template-columns:1fr;
+    }
+
+    .action{
+        grid-template-columns:1fr;
+    }
+
+    .summary-grid{
+        grid-template-columns:1fr;
+    }
+
+    .start{
+        width:100%;
+    }
+
+    #guess{
+        font-size:64px;
+    }
+
+    .container{
+        padding:22px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="hero">
+<div class="hero-icon">🧠</div>
+
+<h1>Binary Search Challenge</h1>
+
+<p class="subtitle">
+Think of a number and let the AI find it using Binary Search.
+</p>
+</div>
+
+<div class="difficulty">
+<button class="preset" onclick="setRange(1,100)">Easy</button>
+<button class="preset" onclick="setRange(1,1000)">Medium</button>
+<button class="preset" onclick="setRange(1,10000)">Hard</button>
+<button class="preset" onclick="setRange(1,1000000)">Extreme</button>
+</div>
+
+<div class="range-box">
+
+<div class="group">
+<label>Minimum</label>
+<input type="number" id="minRange" value="1">
+</div>
+
+<div class="group">
+<label>Maximum</label>
+<input type="number" id="maxRange" value="1000">
+</div>
+
+<button class="start" onclick="startGame()">
+🚀 Start Game
+</button>
+
+</div>
+
+<div id="game">
+
+<div class="card">
+
+<div class="guess-label">
+Current AI Guess
+</div>
+
+<div id="guess">0</div>
+
+<div class="progress">
+<div class="progress-fill" id="progressBar"></div>
+</div>
+
+<div class="stats">
+<div class="badge" id="steps">Step: 1</div>
+<div class="badge" id="maxSteps">Worst Case: 0</div>
+</div>
+
+</div>
+
+<div class="grid">
+<button class="higher" onclick="higher()">⬆ Higher</button>
+<button class="lower" onclick="lower()">⬇ Lower</button>
+</div>
+
+<div class="action">
+<button class="correct" onclick="correctGuess()">✅ Correct</button>
+<button class="undo" onclick="undo()">↩ Undo</button>
+<button class="restart" onclick="startGame()">🔄 Restart</button>
+</div>
+
+<div id="result" class="result"></div>
+
+</div>
+
+</div>
+
+<script>
+let low, high, guess, steps;
+let history = [];
+let initialLow, initialHigh;
+
+function setRange(min,max){
+    document.getElementById("minRange").value = min;
+    document.getElementById("maxRange").value = max;
+}
+
+function startGame(){
+
+    low = parseInt(document.getElementById("minRange").value);
+    high = parseInt(document.getElementById("maxRange").value);
+
+    if(isNaN(low) || isNaN(high)){
+        alert("Please enter valid numbers.");
+        return;
+    }
+
+    if(low >= high){
+        alert("Maximum must be greater than minimum.");
+        return;
+    }
+
+    initialLow = low;
+    initialHigh = high;
+
+    history = [];
+    steps = 1;
+
+    document.getElementById("game").style.display = "block";
+
+    const worstCase =
+        Math.ceil(Math.log2(high - low + 1));
+
+    document.getElementById("maxSteps").innerHTML =
+        "Worst Case: " + worstCase;
+
+    document.getElementById("result").className =
+        "result";
+
+    document.getElementById("result").innerHTML = "";
+
+    updateGuess();
+}
+
+function updateGuess(){
+
+    if(low > high){
+
+        const result =
+            document.getElementById("result");
+
+        result.className =
+            "result error";
+
+        result.innerHTML =
+            "❌ Conflicting hints detected.";
+
+        return;
+    }
+
+    guess =
+        Math.floor((low + high) / 2);
+
+    const guessEl =
+        document.getElementById("guess");
+
+    guessEl.innerHTML = guess;
+
+    guessEl.animate([
+        {transform:'scale(.8)',opacity:.5},
+        {transform:'scale(1)',opacity:1}
+    ],{
+        duration:250
+    });
+
+    document.getElementById("steps").innerHTML =
+        "Step: " + steps;
+
+    const totalRange =
+        initialHigh - initialLow + 1;
+
+    const currentRange =
+        high - low + 1;
+
+    const progress =
+        ((totalRange - currentRange) /
+        totalRange) * 100;
+
+    document.getElementById("progressBar").style.width =
+        progress + "%";
+}
+
+function higher(){
+
+    if(guess >= high){
+        alert("Invalid move.");
+        return;
+    }
+
+    history.push({
+        low,
+        high,
+        steps
+    });
+
+    low = guess + 1;
+
+    steps++;
+
+    updateGuess();
+}
+
+function lower(){
+
+    if(guess <= low){
+        alert("Invalid move.");
+        return;
+    }
+
+    history.push({
+        low,
+        high,
+        steps
+    });
+
+    high = guess - 1;
+
+    steps++;
+
+    updateGuess();
+}
+
+function undo(){
+
+    if(history.length === 0){
+        return;
+    }
+
+    const previous =
+        history.pop();
+
+    low = previous.low;
+    high = previous.high;
+    steps = previous.steps;
+
+    updateGuess();
+}
+
+function correctGuess(){
+
+    const optimal =
+        Math.ceil(
+            Math.log2(
+                initialHigh - initialLow + 1
+            )
+        );
+
+    const saved =
+        optimal - steps;
+
+    const result =
+        document.getElementById("result");
+
+    result.className =
+        "result success";
+
+    result.innerHTML = `
+    <div class="summary-card">
+
+        <h2>🎉 Number Found!</h2>
+
+        <div class="final-number">
+            ${guess}
+        </div>
+
+        <div class="summary-grid">
+
+            <div>
+                <span>Steps</span>
+                <h3>${steps}</h3>
+            </div>
+
+            <div>
+                <span>Worst Case</span>
+                <h3>${optimal}</h3>
+            </div>
+
+            <div>
+                <span>Saved</span>
+                <h3>${saved}</h3>
+            </div>
+
+        </div>
+
+    </div>
+    `;
+}
+</script>
+
+</body>
+</html>
