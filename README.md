@@ -4,11 +4,21 @@ Think of a number and watch the AI guess it.
 
 A fun and interactive browser game where you choose a secret number and the AI tries to find it using smart guesses. Challenge yourself with different difficulty levels and see how quickly the AI can discover your number.
 
+[![Live Demo](https://img.shields.io/badge/Live-Demo-6366F1?style=for-the-badge)](https://abhi88778877.github.io/guess-my-number-ai/)
+
+## 🎮 Live Demo
+
+👉 Play Now: https://abhi88778877.github.io/guess-my-number-ai/
+
+---
+
+## 📸 Screenshot
+
 ![Guess My Number AI](screenshot.png)
 
 ---
 
-## 🎮 How to Play
+## 🎯 How to Play
 
 1. Choose a number range.
 2. Think of a secret number within that range.
@@ -26,14 +36,26 @@ A fun and interactive browser game where you choose a secret number and the AI t
 
 - 🎯 AI-powered number guessing
 - 🚀 Multiple difficulty levels
-- 📊 Progress tracking
+- 📊 Real-time progress tracking
 - 📈 Guess statistics
 - ↩️ Undo functionality
 - 🔄 Restart anytime
-- 📱 Mobile-friendly design
+- 📱 Fully responsive design
 - 🎨 Modern glassmorphism UI
 - ⚡ Lightweight and fast
 - 🌐 Runs directly in the browser
+- 🧩 No frameworks or dependencies
+
+---
+
+## 🎮 Difficulty Levels
+
+| Difficulty | Range |
+|------------|--------|
+| Easy | 1 - 100 |
+| Medium | 1 - 1,000 |
+| Hard | 1 - 10,000 |
+| Extreme | 1 - 1,000,000 |
 
 ---
 
@@ -41,23 +63,29 @@ A fun and interactive browser game where you choose a secret number and the AI t
 
 - HTML5
 - CSS3
-- JavaScript
+- JavaScript (Vanilla JS)
 
 ---
 
 ## 🚀 Getting Started
 
-### Clone the repository
+### Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/guess-my-number-ai.git
+git clone https://github.com/abhi88778877/guess-my-number-ai.git
 ```
 
-### Open the project
+### Open the Project
 
-Simply open `index.html` in your browser.
+Simply open:
 
-No installation, dependencies, or build steps required.
+```text
+index.html
+```
+
+in your favorite browser.
+
+No installation, build tools, or dependencies required.
 
 ---
 
@@ -73,18 +101,15 @@ guess-my-number-ai/
 
 ---
 
-## 🎯 Challenge Yourself
+## 🎯 Why This Project?
 
-Try different ranges:
+This project demonstrates how an AI can quickly find a secret number using smart guessing logic. It combines a fun game experience with an intuitive and visually appealing interface.
 
-| Difficulty | Range |
-|------------|--------|
-| Easy | 1 - 100 |
-| Medium | 1 - 1,000 |
-| Hard | 1 - 10,000 |
-| Extreme | 1 - 1,000,000 |
-
-Can you stump the AI?
+Perfect for:
+- Learning logical problem-solving
+- Exploring search strategies
+- Practicing JavaScript fundamentals
+- Having fun with a simple AI-powered game
 
 ---
 
@@ -94,8 +119,30 @@ Contributions, ideas, and improvements are welcome.
 
 1. Fork the repository
 2. Create a feature branch
+
+```bash
+git checkout -b feature-name
+```
+
 3. Commit your changes
-4. Open a Pull Request
+
+```bash
+git commit -m "Add new feature"
+```
+
+4. Push to your branch
+
+```bash
+git push origin feature-name
+```
+
+5. Open a Pull Request
+
+---
+
+## 🌟 Support
+
+If you enjoyed this project, please consider giving it a ⭐ on GitHub.
 
 ---
 
@@ -105,4 +152,6 @@ This project is licensed under the MIT License.
 
 ---
 
-Made with ❤️ for fun and learning.
+Made with ❤️ by Abhishek Kumar
+
+🎮 Play now: https://abhi88778877.github.io/guess-my-number-ai/
